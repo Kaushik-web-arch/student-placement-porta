@@ -1,0 +1,3 @@
+# Keep GitHub language statistics focused on the Flask backend.
+templates/** linguist-detectable=false
+static/** linguist-detectable=false
