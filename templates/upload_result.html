@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="card shadow border-0">
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+            <div>
+                <h3 class="mb-2">Students uploaded</h3>
+                <p class="text-muted mb-0">
+                    Save these temporary passwords now. They are not displayed again.
+                </p>
+            </div>
+            <a class="btn btn-primary" href="/students">Continue to students</a>
+        </div>
+
+        <div class="alert alert-warning mt-4">
+            Ask every student to change the temporary password during the first login.
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>USN</th>
+                        <th>Name</th>
+                        <th>Temporary password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in credentials %}
+                    <tr>
+                        <td>{{ item.usn }}</td>
+                        <td>{{ item.name }}</td>
+                        <td><code>{{ item.temporary_password }}</code></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3" class="text-muted">No new students were added.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

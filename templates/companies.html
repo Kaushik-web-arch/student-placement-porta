@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-heading d-flex flex-wrap justify-content-between align-items-end gap-3"><div><div class="eyebrow">Drive management</div><h1>Placement drives</h1><p>Create, reschedule, edit, or remove placement drives across both portals.</p></div><a href="/add_company" class="btn btn-primary"><i class="fa-solid fa-plus me-2"></i>Add placement drive</a></div>
+<section class="card"><div class="card-header"><h5 class="fw-bold mb-1">All placement drives</h5><p class="text-muted small mb-0">Every saved change is immediately reflected in the student workspace.</p></div><div class="card-body p-0"><div class="table-responsive border-0 rounded-0"><table class="table table-hover align-middle">
+    <thead><tr><th>Company</th><th>Drive date</th><th>Drive status</th><th>Attendance</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>{% for company in companies %}<tr>
+        <td class="fw-bold">{{ company.company_name }}</td><td>{{ company.drive_date }}</td>
+        <td>{% if company.drive_status == 'Completed' %}<span class="badge bg-success">Completed</span>{% else %}<span class="badge bg-primary">Upcoming</span>{% endif %}</td>
+        <td>{% if company.attendance_marked == 1 %}<span class="badge bg-success">Attendance marked</span>{% elif company.drive_status == 'Completed' %}<span class="badge bg-warning text-dark">Pending</span>{% else %}<span class="badge bg-secondary">Not available yet</span>{% endif %}</td>
+        <td><div class="row-actions justify-content-end"><a href="/edit_company/{{ company.id }}" class="btn btn-outline-primary btn-sm" title="Edit company or date"><i class="fa-solid fa-pen"></i></a><button type="button" class="btn btn-outline-danger btn-sm delete-drive-button" data-company-id="{{ company.id }}" data-company-name="{{ company.company_name|e }}" data-drive-date="{{ company.drive_date }}" data-bs-toggle="modal" data-bs-target="#deleteDriveModal" title="Delete placement drive"><i class="fa-regular fa-trash-can"></i></button></div></td>
+    </tr>{% else %}<tr><td colspan="5" class="empty-state">No placement drives have been added yet.</td></tr>{% endfor %}</tbody>
+</table></div></div></section>
+
+<div class="modal fade" id="deleteDriveModal" tabindex="-1" aria-labelledby="deleteDriveTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content delete-modal"><div class="modal-body p-4 p-md-5 text-center">
+    <div class="delete-warning-icon"><i class="fa-regular fa-calendar-xmark"></i></div><h4 class="fw-bold mt-3" id="deleteDriveTitle">Delete this placement drive?</h4><p class="text-muted mb-2">You are about to permanently delete</p><p class="fw-bold mb-3" id="deleteDriveName"></p>
+    <div class="alert alert-danger small text-start"><i class="fa-solid fa-triangle-exclamation me-1"></i> The drive and its attendance records will disappear from both admin and student portals. Student missed-drive totals will be recalculated.</div>
+    <form method="POST" id="deleteDriveForm"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><div class="d-flex gap-2 justify-content-center mt-4"><button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button><button type="submit" class="btn btn-danger px-4">Delete drive</button></div></form>
+</div></div></div></div>
+<script>document.querySelectorAll('.delete-drive-button').forEach(button=>{button.addEventListener('click',()=>{document.getElementById('deleteDriveName').textContent=`${button.dataset.companyName} · ${button.dataset.driveDate}`;document.getElementById('deleteDriveForm').action=`/delete_company/${button.dataset.companyId}`;});});</script>
+{% endblock %}

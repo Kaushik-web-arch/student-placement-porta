@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="card shadow rounded-4">
+
+    <div class="card-header bg-success text-white">
+
+        <h3>{{ company.company_name }}</h3>
+
+        <small>
+
+            Drive Date :
+            {{ company.drive_date }}
+
+        </small>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>USN</th>
+
+                    <th>Name</th>
+
+                    <th>Branch</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for student in attendance %}
+
+            <tr>
+
+                <td>{{ student.usn }}</td>
+
+                <td>{{ student.name }}</td>
+
+                <td>{{ student.branch }}</td>
+
+                <td>
+
+                    {% if student.status=="Attended" %}
+
+                        <span class="badge bg-success">
+
+                            Attended
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-danger">
+
+                            Missed
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

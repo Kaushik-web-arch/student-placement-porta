@@ -1,0 +1,220 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <!-- Student Details -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                         width="120"
+                         class="mb-3">
+
+                    <h3>{{ student.name }}</h3>
+
+                    <hr>
+
+                    <p><strong>USN :</strong> {{ student.usn }}</p>
+
+                    <p><strong>Branch :</strong> {{ student.branch }}</p>
+
+                    <p><strong>Email :</strong> {{ student.email }}</p>
+
+                    <hr>
+
+                    {% if student.debarred==1 %}
+
+                    <h3 class="text-danger">
+
+                        DEBARRED
+
+                    </h3>
+
+                    {% else %}
+
+                    <h3 class="text-success">
+
+                        ACTIVE
+
+                    </h3>
+
+                    {% endif %}
+
+                    <a href="/edit_student/{{ student.id }}"
+                       class="btn btn-primary w-100 mt-3">
+                        <i class="fa-solid fa-pen-to-square me-2"></i>Edit student details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Attendance -->
+
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h4>
+
+                        Placement Summary
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row text-center">
+
+                        <div class="col">
+
+                            <h5>Missed Drives</h5>
+
+                            <h1>
+
+                                {{ student.missed_companies }}/5
+
+                            </h1>
+
+                        </div>
+
+                        <div class="col">
+
+                            <h5>Attendance Tracker</h5>
+
+                            <br>
+
+                            {% for i in range(5) %}
+
+                                {% if i < student.missed_companies %}
+
+                                <span style="
+                                height:30px;
+                                width:30px;
+                                background:#dc3545;
+                                border-radius:50%;
+                                display:inline-block;
+                                margin-right:10px;
+                                ">
+                                </span>
+
+                                {% else %}
+
+                                <span style="
+                                height:30px;
+                                width:30px;
+                                border:3px solid #28a745;
+                                border-radius:50%;
+                                display:inline-block;
+                                margin-right:10px;
+                                ">
+                                </span>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-success text-white">
+
+                    <h4>
+
+                        Placement History
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+
+                        <thead>
+
+                        <tr>
+
+                            <th>Company</th>
+
+                            <th>Drive Date</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        {% for row in history %}
+
+                        <tr>
+
+                            <td>{{ row.company_name }}</td>
+
+                            <td>{{ row.drive_date }}</td>
+
+                            <td>
+
+                                {% if row.status=="Attended" %}
+
+                                <span class="badge bg-success">
+
+                                    Attended
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-danger">
+
+                                    Missed
+
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+.student-search{position:relative;width:min(100%,330px)}
+.student-search i{position:absolute;left:14px;top:50%;z-index:2;color:#94a3b8;transform:translateY(-50%)}
+.student-search input{padding-left:39px}
+.branch-chip{display:inline-flex;padding:5px 9px;border-radius:8px;background:#eff6ff;color:#1d4ed8;font-size:.76rem;font-weight:800}
+.password-cell{display:flex;align-items:center;gap:5px;min-width:150px}
+.password-display{width:105px;border:0;background:transparent;color:#0f172a;font:700 .82rem ui-monospace,SFMono-Regular,Menlo,monospace;outline:0}
+.icon-button{display:grid;place-items:center;width:30px;height:30px;border:1px solid #dbe5ef;border-radius:8px;background:#fff;color:#64748b}
+.icon-button:hover{color:#2563eb;border-color:#93c5fd}
+.private-password{display:inline-flex;align-items:center;gap:6px;color:#64748b;font-size:.76rem;white-space:nowrap}
+.row-actions{display:flex;gap:6px;white-space:nowrap}
+.row-actions .btn{display:grid;place-items:center;width:34px;height:34px;padding:0}
+.delete-modal{overflow:hidden;border:0!important}
+.delete-warning-icon{display:grid;place-items:center;width:58px;height:58px;margin:auto;border-radius:18px;background:#fee2e2;color:#dc2626;font-size:1.35rem}
+.modal-backdrop.show{opacity:.62}
+.profile-initial{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#dbeafe,#cffafe);color:#1d4ed8;font-size:1.1rem;font-weight:850}

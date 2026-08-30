@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow rounded-4 border-0">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>Edit Placement Drive</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Company Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        name="company_name"
+                        class="form-control"
+                        value="{{ company.company_name }}"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Drive Date
+
+                    </label>
+
+                    <input
+                        type="date"
+                        name="drive_date"
+                        class="form-control"
+                        value="{{ company.drive_date }}"
+                        required>
+
+                </div>
+
+                <div class="mt-4">
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        Save Changes
+
+                    </button>
+
+                    <a href="/companies"
+                       class="btn btn-secondary">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-heading"><div class="eyebrow">Student directory</div><h1>Edit student details</h1><p>Changes are saved to the shared record and appear in the student portal immediately.</p></div>
+<div class="row justify-content-center"><div class="col-xl-8"><section class="card">
+    <div class="card-header d-flex align-items-center gap-3"><div class="profile-initial">{{ student.name[0]|upper }}</div><div><h5 class="fw-bold mb-1">{{ student.name }}</h5><p class="text-muted small mb-0">{{ student.usn }}</p></div></div>
+    <div class="card-body p-4">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <div class="row g-3">
+                <div class="col-md-6"><label class="form-label" for="usn">USN / login ID</label><input class="form-control" id="usn" name="usn" value="{{ student.usn }}" maxlength="30" required><div class="form-text">Changing the USN also changes the student's login username.</div></div>
+                <div class="col-md-6"><label class="form-label" for="name">Full name</label><input class="form-control" id="name" name="name" value="{{ student.name }}" maxlength="100" required></div>
+                <div class="col-md-6"><label class="form-label" for="email">Email address</label><input class="form-control" id="email" type="email" name="email" value="{{ student.email }}" maxlength="100" required></div>
+                <div class="col-md-6"><label class="form-label" for="branch">Branch</label><input class="form-control" id="branch" name="branch" value="{{ student.branch }}" maxlength="50" required></div>
+                <div class="col-md-6"><label class="form-label" for="status">Placement status</label><select class="form-select" id="status" name="status"><option value="active" {% if not student.debarred %}selected{% endif %}>Active</option><option value="debarred" {% if student.debarred %}selected{% endif %}>Debarred</option></select></div>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mt-4 pt-3 border-top"><button class="btn btn-primary px-4" type="submit"><i class="fa-solid fa-check me-2"></i>Save changes</button><a class="btn btn-outline-secondary px-4" href="/student/{{ student.id }}">Cancel</a></div>
+        </form>
+    </div>
+</section></div></div>
+{% endblock %}

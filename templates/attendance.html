@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="card shadow border-0 rounded-4">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>Placement Drive Attendance</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>Company</th>
+
+                        <th>Drive Date</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for company in companies %}
+
+                <tr>
+
+                    <td>
+
+                        {{ company.company_name }}
+
+                    </td>
+
+                    <td>
+
+                        {{ company.drive_date }}
+
+                    </td>
+
+                    <td>
+
+                        {% if company.attendance_marked == 1 %}
+
+                        <span class="badge bg-success">
+
+                            Attendance Marked
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-warning text-dark">
+
+                            Pending
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {% if company.attendance_marked == 1 %}
+
+                        <a href="/view_attendance/{{ company.id }}"
+                           class="btn btn-success btn-sm">
+
+                            View Attendance
+
+                        </a>
+
+                        {% else %}
+
+                        <a href="/mark_attendance/{{ company.id }}"
+                           class="btn btn-primary btn-sm">
+
+                            Mark Attendance
+
+                        </a>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
