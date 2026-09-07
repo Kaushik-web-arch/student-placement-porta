@@ -224,6 +224,8 @@ Current result: **11 tests passing**.
 Computer Science (Data Science) undergraduate  
 GitHub: [Kaushik-web-arch](https://github.com/Kaushik-web-arch)
 
-## License
+## Copyright
 
-This project is available under the [MIT License](LICENSE).
+© 2026 **Kaushik Santhosh**. All rights reserved.
+
+This repository and its source code are provided publicly for portfolio, educational review, and demonstration purposes. No permission is granted to copy, modify, redistribute, sublicense, or use substantial portions of this project without prior written permission from the copyright holder.
