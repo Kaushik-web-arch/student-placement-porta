@@ -4,11 +4,10 @@
 ![Flask](https://img.shields.io/badge/Flask-3.x-000000?logo=flask&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)
-![Tests](https://img.shields.io/badge/Tests-11%20passing-16A34A)
 
 A full-stack placement management application that keeps student records, placement drives, attendance, eligibility, and student access synchronized between dedicated administrator and student portals.
 
-This repository contains the portfolio version maintained and extended by **Kaushik Santhosh**.
+This application was built from scratch by **Kaushik Santhosh** and is maintained as a personal portfolio project.
 
 ## Application preview
 
@@ -36,7 +35,7 @@ Placement information is often distributed across spreadsheets, messages, and ma
 
 ### Student workspace
 
-- Secure student login and compulsory first-login password change
+- Student login with a first-login redirect to password replacement
 - Personal dashboard with eligibility and missed-drive progress
 - Latest-five-drive attendance tracker
 - Placement-drive list with upcoming/completed status
@@ -45,10 +44,10 @@ Placement information is often distributed across spreadsheets, messages, and ma
 
 ### Data consistency and safety
 
-- Passwords are stored using Werkzeug password hashing
+- Newly set authentication passwords use Werkzeug hashing; temporary credentials remain readable until replacement
 - Student-selected passwords are never shown to administrators
 - Only active temporary passwords can be revealed
-- Sensitive administrator actions use POST requests and session CSRF tokens
+- Selected administrator edit, reset and delete controls use POST requests and session CSRF tokens
 - Deleting a student removes connected attendance, feedback, attempts, notifications, and placement results
 - Deleting a drive removes its attendance/history and recalculates student missed-drive totals
 - Stable student-session IDs keep both portals synchronized when profile information changes
@@ -202,7 +201,7 @@ The regression suite covers:
 - Placement-drive deletion and attendance-total recalculation
 - CSRF validation and confirmation controls
 
-Current result: **11 tests passing**.
+The suite contains 11 test methods. Run the command above to establish the result for your checkout.
 
 ## Privacy notes
 
@@ -223,6 +222,27 @@ Current result: **11 tests passing**.
 **Kaushik Santhosh**  
 Computer Science (Data Science) undergraduate  
 GitHub: [Kaushik-web-arch](https://github.com/Kaushik-web-arch)
+
+## Scope and reproducible walkthrough
+
+Eligibility in this version is based on missed-drive/debarment status. Resume upload, CGPA/skills-based matching, advanced placement analytics and automated email delivery are not demonstrated by the current routes.
+
+The tests in [tests/test_admin_student_controls.py](tests/test_admin_student_controls.py) use Flask's test client and a fake database connection. They exercise application behavior but do not replace integration testing against MySQL.
+
+Use a disposable local database and fictional records for this walkthrough:
+
+1. Import the included demo CSV as an administrator and retain one generated temporary credential locally.
+2. Sign in as that student, replace the temporary password, and check the profile.
+3. Edit the student's name or USN as administrator, then refresh the student workspace to check synchronization.
+4. Create a demo drive, record attendance and inspect the student's history.
+5. Delete that demo drive and verify attendance totals are recalculated.
+6. Delete the demo student and verify the existing student session is rejected.
+
+Record the commit, environment and actual outcomes before describing the walkthrough as passed. The demo CSV is sample input, not evidence of real student adoption.
+
+### Security boundaries
+
+Temporary passwords are stored in readable form until replaced; student-selected passwords are hashed. Legacy plaintext password comparison remains for compatibility. CSRF validation is implemented on selected administrative controls, not every state-changing route. These controls do not establish production security.
 
 ## Copyright
 
