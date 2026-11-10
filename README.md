@@ -7,7 +7,7 @@
 
 A full-stack placement management application that keeps student records, placement drives, attendance, eligibility, and student access synchronized between dedicated administrator and student portals.
 
-This repository contains the portfolio version maintained and extended by **Kaushik Santhosh**.
+This application was built from scratch by **Kaushik Santhosh** and is maintained as a personal portfolio project.
 
 ## Application preview
 
